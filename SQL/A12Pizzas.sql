@@ -105,11 +105,12 @@ JOIN orders o ON c.id_customer = o.id_customer
 JOIN order_details od ON o.id_orders = od.id_order_details
 GROUP BY c.id_customer;
 
-SELECT c.id_customer, c.customer_name, o.order_datetime, SUM(od.pizza_cost * od.quantity) AS total_spent
+SELECT c.id_customer, c.customer_name, DATE(o.order_datetime) AS order_date, SUM(od.pizza_cost * od.quantity) AS total_spent
 FROM customer c
 JOIN orders o ON c.id_customer = o.id_customer
 JOIN order_details od ON o.id_orders = od.id_order_details
-GROUP BY c.id_customer, o.order_datetime;
+GROUP BY c.id_customer, DATE(o.order_datetime);
+
 
 
 
